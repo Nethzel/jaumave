@@ -18,7 +18,7 @@ export async function create(req: express.Request, res: express.Response) {
 
     const file = req.file;
 
-    await compressImage(file?.path ?? '', file?.filename ?? '');
+    //await compressImage(file?.path ?? '', file?.filename ?? '');
     const post = new Post({
         title,
         section,

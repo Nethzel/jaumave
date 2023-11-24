@@ -18,7 +18,7 @@ export async function create(req: express.Request, res: express.Response) {
 
     const file = req.file;
 
-    await compressImage(file?.path ?? '', file?.filename ?? '');
+    //await compressImage(file?.path ?? '', file?.filename ?? '');
 
     const meses = ["Enero", "Feb", "Mar", "Abril", "Mayo", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     const fecha = new Date(date)

@@ -150,7 +150,7 @@ export default {
             details: '',
             section: '',
             location: '',
-            multiplelocation: '',
+            multiplelocation: false,
             contact: '',
             img: null,
             file: null,
@@ -217,8 +217,25 @@ export default {
 
             console.log(this.selectFile)
 
-            console.log(fd)
-            axios.post("/api/post/", fd).then((res => console.log(res.status)))
+            axios.post("/api/post/", fd).then((res => {
+
+                this.$root.showNotify('success', 'Se ha agregado el evento')
+                
+                this.title = ''
+                this.desc = ''
+                this.details = ''
+                this.section = ''
+                this.location = ''
+                this.multiplelocation = false
+                this.contact = ''
+                this.img = null
+                this.selectFile = null
+
+                axios.get("/api/post/").then((res) => {
+                    this.posts = res.data;
+                    
+                })
+            }))
         }
     },
     mounted() {

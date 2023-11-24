@@ -4,7 +4,7 @@ import path from 'path'
 
 
 const storage = multer.diskStorage({
-    destination: path.join(__dirname, '../../public/uploads/temp'),
+    destination: path.join(__dirname, '../../public/optimize/'),
     filename: (req, file, cb) => {
         cb(null, `${uuidv4()}${path.extname(file.originalname)}` )
     }
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 
 export default multer( {
     storage,
-    dest: path.join(__dirname, '../../public/uploads/temp')
+    dest: path.join(__dirname, '../../public/optimize/')
 } ).single('image')
 
 
