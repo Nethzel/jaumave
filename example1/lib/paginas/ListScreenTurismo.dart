@@ -94,20 +94,20 @@ class _TurismoScreenState extends State<TurismoScreen> {
                           itemBuilder: (context, index) {
                             var restaurante = snapshot.data?[index];
                             return ItemWidget(
-                              id: restaurante['_id'],
-                              asset: restaurante['image'],
-                              title: restaurante['title'],
-                              desc: restaurante['location'],
-                              fullDesc: restaurante['location'],
-                              ubicacion: restaurante['location'],
-                              contactos1: restaurante['contact'],
-                              onFavoritePressed: () {
-                                // Cuando el botón de favoritos es presionado en ItemWidget,
-                                // elimina el elemento de la lista y actualiza el estado
-                                setState(() {
-                                  snapshot.data?.removeAt(index);
-                                });
-                              },
+                                id: restaurante['_id'],
+                                asset: restaurante['image'],
+                                title: restaurante['title'],
+                                desc: restaurante['details'],
+                                fullDesc: restaurante['description'],
+                                ubicacion: restaurante['location'],
+                                contactos1: restaurante['contact'],
+                                onFavoritePressed: () {
+                                  // Cuando el botón de favoritos es presionado en ItemWidget,
+                                  // elimina el elemento de la lista y actualiza el estado
+                                  setState(() {
+                                    snapshot.data?.removeAt(index);
+                                  });
+                                },
                             );
                           },
                         ),
@@ -139,7 +139,7 @@ class _TurismoScreenState extends State<TurismoScreen> {
             builder: (context) => DetailScreenComida(
               asset: asset,
               tag: title,
-              fullDesc: fullDesc,
+              fullDesc: desc,
               descoment: ubicacion,
               contacto1: contactos1,
               contacto2: contactos2,

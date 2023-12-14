@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mave/paginas/DetailScreenComida.dart';
 import '../modelos//Lugares.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -6,12 +7,7 @@ import 'dart:convert';
 
 
 class NegociosSearchDelegate extends SearchDelegate {
-  /*List<String> searchResults = [
-    'La fonda',
-    'Artesania..',
-    'Hotel',
-    'Rio',
-  ];*/
+
 
   List<Lugares> searchResults = [];
 
@@ -56,29 +52,55 @@ class NegociosSearchDelegate extends SearchDelegate {
         ),
       );
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    fetchData();
-    List<Lugares> suggestions = searchResults.where((searchResult) {
-      final result = searchResult.title.toLowerCase();
-      final input = query.toLowerCase();
-      return result.contains(input);
-    }).toList();
 
-    return ListView.builder(
-      itemCount: suggestions.length,
-      itemBuilder: (context, index) {
-        final suggestion = suggestions[index];
 
-        return ListTile(
-          title: Text(suggestion.title),
-          onTap: () {
-            query = suggestion.title;
+@override
+Widget buildSuggestions(BuildContext context) {
+  fetchData();
 
-            showResults(context);
-          },
-        );
-      },
-    );
-  }
+  
+  List<Lugares> suggestions = searchResults.where((searchResult) {
+    final result = searchResult.title.toLowerCase();
+    final input = query.toLowerCase();
+    return result.contains(input);
+  }).toList();
+
+  return ListView.builder(
+    itemCount: suggestions.length,
+    itemBuilder: (context, index) {
+      final suggestion = suggestions[index];
+
+      /* 
+          id: restaurante['_id'],
+          asset: restaurante['image'],
+          title: restaurante['title'],
+          desc: restaurante['details'],
+          fullDesc: restaurante['description'],
+          ubicacion: restaurante['location'],
+          contactos1: restaurante['contact'],
+
+      */
+
+      return ListTile(
+        title: Text(suggestion.title),
+        onTap: () {
+          // Navegación a la pantalla de detalles
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => DetailScreenComida(
+                asset: suggestion.image,
+                tag: suggestion.title,
+                fullDesc: suggestion.description,
+                descoment: suggestion.location,
+                contacto1: suggestion.contact,
+                /*contacto2: suggestion.contactos2,
+                contacto3: suggestion.contactos3,*/
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
+}
 }

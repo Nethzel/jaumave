@@ -169,6 +169,8 @@ export default {
         },
         submit() {
 
+            
+
 
             if(this.title == '' ) return this.$root.showNotify('error', 'Necesitas llenar el titulo ');
             if(this.location == '') return this.$root.showNotify('error', 'Necesitas una localización ');
@@ -178,11 +180,18 @@ export default {
             //if(this.image_data.length == 0) this.$root.showNotify('error', 'Necesitas subir fotos de muestra')
             const fd = new FormData();
 
+            const fecha = new Date(this.fecha)
+            let fechaCampo = new Date(fecha);
+
+            // Ajustar la fecha a la zona horaria local
+            const fechaAjustada = new Date(fechaCampo.getTime() + fechaCampo.getTimezoneOffset() * 60000);
+
             const data = {
                 name: this.title,
                 location: this.location,
                 details: this.details,
-                date: this.fecha,
+                date: fechaAjustada,
+                time: this.time
             }
 
             //title, section, description, details, locaiton, multilocation, contact
@@ -190,7 +199,16 @@ export default {
             fd.append("data", JSON.stringify(data));
             fd.append('image', this.selectFile);
 
-            axios.post("/api/eventos", fd).then((res => console.log(res.status)))
+            axios.post("/api/eventos", fd).then((res => {
+                this.$root.showNotify('success', 'Se ha agregado el evento')
+                this.eventos.push(res.data)
+                this.title = ''
+                this.location = ''
+                this.details = ''
+                this.fecha = ''
+                this.img = null
+                this.time = ''
+            }))
         },
     },
     mounted() {

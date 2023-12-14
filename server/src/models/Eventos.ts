@@ -24,6 +24,9 @@ class Eventos {
     @prop() 
     public date?: Date
 
+    @prop() 
+    public time?: string
+
 
 }
 

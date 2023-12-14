@@ -14,7 +14,7 @@ const compressImage = async (imagePath:string, name: string) => {
 
 
 export async function create(req: express.Request, res: express.Response) {
-    const { name, location, date, details} = JSON.parse(req.body.data)
+    const { name, location, date, details, time} = JSON.parse(req.body.data)
 
     const file = req.file;
 
@@ -30,7 +30,8 @@ export async function create(req: express.Request, res: express.Response) {
             image: file?.filename,
             day: fecha.getDate(),
             month: meses[fecha.getMonth()],
-            date: fecha
+            date: fecha,
+            time: time
         }
     )
 
@@ -43,14 +44,16 @@ export async function create(req: express.Request, res: express.Response) {
 
 export async function get(req: express.Request, res: express.Response)  {
 
-    const find = await Evento.find();
-    if(req.query.date == 'now') {
-        const currentEvents = find.filter( (evento: any) => {
+    let find = await Evento.find();
+    find.sort((a: any, b: any) => a.date - b.date);
+
+    if (req.query.date == 'now') {
+        const currentEvents = find.filter((evento: any) => {
             const now = new Date();
             const diff = evento.date.getTime() - now.getTime();
             const days = Math.ceil(diff / (1000 * 3600 * 24));
-            return days <= 7;
-        })
+            return days <= 7 && days > 0;
+        });
         return res.status(200).json(currentEvents);
     }
 

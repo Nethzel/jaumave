@@ -6,7 +6,7 @@ class EventModel {
   final String? image;
   final String? day;
   final String? month;
-  
+  final String? time;
 
   EventModel({
     this.id,
@@ -16,7 +16,7 @@ class EventModel {
     this.image,
     this.day,
     this.month,
-
+    this.time
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -27,7 +27,8 @@ class EventModel {
         location: json['location'],
         image: json['image'],
         day: json['day'],
-        month: json['month']
+        month: json['month'],
+        time: json['time']
     );
   }
 }

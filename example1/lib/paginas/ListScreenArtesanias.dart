@@ -99,8 +99,8 @@ class _ArtesaniaScreenState extends State<ArtesaniaScreen> {
                               id: restaurante['_id'],
                               asset: restaurante['image'],
                               title: restaurante['title'],
-                              desc: restaurante['location'],
-                              fullDesc: restaurante['location'],
+                              desc: restaurante['details'],
+                              fullDesc: restaurante['description'],
                               ubicacion: restaurante['location'],
                               contactos1: restaurante['contact'],
                               onFavoritePressed: () {

@@ -110,8 +110,8 @@
                                 <font-awesome-icon :icon="[item.trending ? 'fas' : 'far' , 'star']" />
                             </div>
 
-                            <div class="button">
-                                <font-awesome-icon :icon="['fas', 'check']" />
+                            <div class="button" @click="remove(item._id)">
+                                <font-awesome-icon :icon="['fas', 'times']" />
                             </div>
                         </div>
                     </div>
@@ -186,6 +186,12 @@ export default {
             this.selectFile = file;
             this.img = URL.createObjectURL(file);
 
+        },
+        remove(id) {
+            axios.delete(`/api/post/${id}`).then((res) => {
+                this.$root.showNotify('success', 'Se ha eliminado el evento')
+                this.posts = this.posts.filter((item) => item._id != id)
+            })
         },
         submit() {
 

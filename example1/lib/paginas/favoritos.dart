@@ -48,9 +48,8 @@ class FavoriteListState extends State<FavoriteList> {
   @override
   void initState() {
       super.initState();
-      
       loadLikes();
-
+      
   }
 
   
@@ -63,12 +62,13 @@ class FavoriteListState extends State<FavoriteList> {
         items =  likesList.map((likeJson) => Like.fromJson(likeJson)).toList();
       }
 
-      setState(() {});
+      setState(() {
+
+      });
   }
 
 
 
-  
 
   List<String> favoriteItems = [];
 
@@ -119,12 +119,12 @@ class FavoriteListState extends State<FavoriteList> {
                                     setState(() {
                                       
                                       items.removeAt(index);
+                                      likes.loadLikes();
+                                      //items.removeWhere((o) => o.id == item.id);
+
                                     });
                                   },
-                                  )
-
-                              
-                              
+                                  )                              
                               ],
                               
                         ),

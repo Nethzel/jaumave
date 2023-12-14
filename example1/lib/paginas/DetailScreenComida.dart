@@ -8,8 +8,8 @@ class DetailScreenComida extends StatefulWidget {
       required this.fullDesc,
       required this.descoment,
       required this.contacto1,
-      required this.contacto2,
-      required this.contacto3})
+      this.contacto2 = '',
+      this.contacto3 = ''})
       : super(key: key);
   final String asset;
   final String tag;
@@ -74,7 +74,7 @@ class _DetailScreenComidaState extends State<DetailScreenComida> {
                 horizontal: screenWidth / 20,
               ),
               child: Text(
-                widget.fullDesc,
+                'Descripción ${widget.fullDesc}',
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.black87,

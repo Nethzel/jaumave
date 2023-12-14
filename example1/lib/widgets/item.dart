@@ -45,6 +45,15 @@ class ItemWidgetState  extends State<ItemWidget>  {
         super.initState();
 
         favorite = widget.isFavorite;
+
+        Likes likes = Likes();
+        likes.loadLikes().then((value) {
+            likes.isLiked(widget.id).then((value) {
+                setState(() {
+                    favorite = value;
+                });
+            });
+        });
     }
 
 
@@ -59,9 +68,6 @@ class ItemWidgetState  extends State<ItemWidget>  {
         String contactos1 = widget.contactos1;
         String contactos2 = widget.contactos2;
         String contactos3 = widget.contactos3;
-
-        
-
         
         void toggleFavorite(bool isFavorite) {
 
@@ -69,9 +75,6 @@ class ItemWidgetState  extends State<ItemWidget>  {
             if(isFavorite == false) {
                 like.removeLikeById(widget.id);
                 widget.onFavoritePressed();
-                setState(() {
-                    favorite = false;
-                });
                 return;
             }
 

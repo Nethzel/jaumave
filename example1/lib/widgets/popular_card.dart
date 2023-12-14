@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mave/modelos/events_model.dart';
-
-import 'package:mave/modelos/popular_model.dart';
 import 'package:mave/widgets/shared/theme.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 
 class PopularCard extends StatelessWidget {
@@ -57,7 +54,7 @@ class PopularCard extends StatelessWidget {
             height: 2,
           ),
           Text(
-            '${event.day!} ${event.month!} • 00:00',
+            '${event.day!} ${event.month!} • ${event.time!}',
             style: secondaryTextStyle.copyWith(
               fontSize: 12,
             ),

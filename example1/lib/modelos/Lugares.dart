@@ -7,7 +7,7 @@ class Lugares {
     String description;
     String image;
     String details;
-    String location;
+    String location;//
     bool multilocation;
     String contact;
 

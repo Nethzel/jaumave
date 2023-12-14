@@ -30,11 +30,12 @@ class EventCard extends StatelessWidget {
             children: [
               Container(
                 width: 176,
-                height: 106,
+                height: 117,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: DecorationImage(
-                    image: NetworkImage( "http://10.0.2.2:3000/optimize/${event.image!}" ),
+                    image: NetworkImage( "http://10.0.2.2:3000/optimize/${event.image!}"),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -80,9 +81,21 @@ class EventCard extends StatelessWidget {
               ),
             ],
           ),
+          
           const SizedBox(
             height: 10,
           ),
+          Text(
+            event.name!,
+            style: primaryTextStyle.copyWith(
+              fontWeight: semiBold,
+            ),
+          ),
+          
+          const SizedBox(
+            height: 5,
+          ),
+          
           Row(
             children: [
               const Icon(
@@ -99,18 +112,26 @@ class EventCard extends StatelessWidget {
               ),
             ],
           ),
+          Row(
+            children: [
+              const Icon(
+                Icons.schedule,
+                size: 12,
+                color: Colors.red,
+              ),
+              const SizedBox(
+                width: 4,
+              ),
+              Text(
+                '${event.day!} ${event.month!} • ${event.time!}',
+                style: greyTextStyle,
+              ),
+            ],
+          ),
           const SizedBox(
-            height: 2,
+            height: 10,
           ),
-          Text(
-            event.name!,
-            style: primaryTextStyle.copyWith(
-              fontWeight: semiBold,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          
           SizedBox(
             width: double.infinity,
             height: 33,
@@ -122,6 +143,10 @@ class EventCard extends StatelessWidget {
                       image: event.image!,
                       description: event.details!,
                       location: event.location!,
+                      day: event.day!,
+                      month: event.month!,
+                      time: event.time!,
+
                     )));
               },
               style: TextButton.styleFrom(

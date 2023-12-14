@@ -103,8 +103,8 @@ class _HospedajeScreenState extends State<HospedajeScreen> {
                                         id: restaurante['_id'],
                                         asset: restaurante['image'],
                                         title: restaurante['title'],
-                                        desc: restaurante['location'],
-                                        fullDesc: restaurante['location'],
+                                        desc: restaurante['details'],
+                                        fullDesc: restaurante['description'],
                                         ubicacion: restaurante['location'],
                                         contactos1: restaurante['contact'],
                                         onFavoritePressed: () {
@@ -139,7 +139,7 @@ class _HospedajeScreenState extends State<HospedajeScreen> {
                 builder: (context) => DetailScreenComida(
                 asset: asset,
                 tag: title,
-                fullDesc: fullDesc,
+                fullDesc: desc,
                 descoment: ubicacion,
                 contacto1: contactos1,
                 contacto2: contactos2,

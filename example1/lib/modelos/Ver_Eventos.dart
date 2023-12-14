@@ -1,6 +1,7 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:mave/paginas/negocios.dart';
- 
+
 
 
 class VerEventos extends StatelessWidget {
@@ -9,13 +10,20 @@ class VerEventos extends StatelessWidget {
     required  this.title,
     required this.image,
     required this.description,
-    required this.location
+    required this.location,
+    required this.day,
+    required this.month,
+    required this.time
   });
 
   final String title;
   final String image;
   final String description;
   final String location;
+  final String day;
+  final String month;
+  final String time;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,27 +85,51 @@ class VerEventos extends StatelessWidget {
                         ),
                       ),          
                       Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding( 
-
+                        alignment: Alignment.topLeft,
+                        child: Padding( 
                         padding: const EdgeInsets.symmetric( vertical: 10),
-                          child: Row(children: [
+                            child: Row(children: [
 
-                            const Icon( Icons.location_on, color: Colors.black, size: 20, ),
-                            Text( 
-                              location.toUpperCase(), 
-                              style: const TextStyle(
-                                fontSize: 16, 
-                                fontFamily: 'Montserrat',
-                                color: Color.fromARGB(255, 5, 4, 4),
-                                fontWeight: FontWeight.w600)
-                            ),
-                            
-                          ],)
-                      )
-                    ),            
-                      Padding(
+                              const Icon( Icons.location_on, color: Colors.black, size: 20, ),
+                              Text( 
+                                location.toUpperCase(), 
+                                style: const TextStyle(
+                                  fontSize: 16, 
+                                  fontFamily: 'Montserrat',
+                                  color: Color.fromARGB(255, 5, 4, 4),
+                                  fontWeight: FontWeight.w600)
+                              ),
+
+                              
+                              
+                            ],)
+                        )
+                      
+                      ),  
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding( 
                         padding: const EdgeInsets.symmetric( vertical: 0),
+                            child: Row(children: [
+
+                              const Icon( Icons.schedule_outlined, color: Colors.black, size: 20, ),
+                              Text( 
+                                '$day $month $time', 
+                                style: const TextStyle(
+                                  fontSize: 16, 
+                                  fontFamily: 'Montserrat',
+                                  color: Color.fromARGB(255, 5, 4, 4),
+                                  fontWeight: FontWeight.w600)
+                              ),
+
+                              
+                              
+                            ],)
+                        )
+                      
+                      ),            
+                      Padding(
+                        padding: const EdgeInsets.symmetric( vertical: 5),
                         child: Align(alignment: Alignment.topLeft ,
                           child: Text( description, 
                           style: const TextStyle(
