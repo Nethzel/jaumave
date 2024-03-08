@@ -21,6 +21,9 @@ class Publicaciones {
     @prop() 
     public details?: string;
 
+    @prop()
+    public maps?: string;
+
     @prop() 
     public location?: string;
 

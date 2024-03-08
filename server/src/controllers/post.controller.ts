@@ -2,6 +2,7 @@ import express from 'express';
 import Post from '../models/Post';
 
 import sharp from 'sharp';
+import { validatePost } from '../schemas/post.validation';
 
 
 const compressImage = async (imagePath:string, name: string) => {
@@ -13,15 +14,23 @@ const compressImage = async (imagePath:string, name: string) => {
 }
 
 export async function create(req: express.Request, res: express.Response) {
-    const { title, section, description, details, location, multilocation, contact} = JSON.parse(req.body.data);
+
+    const result = validatePost(JSON.parse(req.body.data))
+    //const { title, maps, section, description, details, location, multilocation, contact} = JSON.parse(req.body.data);
 
 
+    if(!result.success) return res.status(401).json(result.error);
     const file = req.file;
+
+    // check if file exist
+    if(!file) return res.status(401).json({ message: "No se asigno la imagen" });
+    const  { title, maps, section, description, details, location, multilocation, contact}  = result.data;
 
     //await compressImage(file?.path ?? '', file?.filename ?? '');
     const post = new Post({
         title,
         section,
+        maps,
         description,
         details,
         location,

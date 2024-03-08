@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use( express.json())
 
 app.use(cors({
-    origin: ['https://nethzel.com', 'http://localhost:5173' ],
+    origin: ['https://nethzel.com', 'http://localhost:5174' ],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
     exposedHeaders: ['token'],

@@ -14,7 +14,7 @@ const compressImage = async (imagePath:string, name: string) => {
 
 
 export async function create(req: express.Request, res: express.Response) {
-    const { name, location, date, details, time} = JSON.parse(req.body.data)
+    const { name,  location, date, details, time} = JSON.parse(req.body.data)
 
     const file = req.file;
 
@@ -22,6 +22,9 @@ export async function create(req: express.Request, res: express.Response) {
 
     const meses = ["Enero", "Feb", "Mar", "Abril", "Mayo", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     const fecha = new Date(date)
+
+
+
     const event  = new Evento(
         {
             name,
