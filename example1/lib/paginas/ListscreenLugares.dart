@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mave/paginas/negocios.dart';
 import 'package:mave/widgets/item.dart';
-import 'detailScreenComida.dart';
 import 'package:mave/paginas/principal.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -101,6 +100,7 @@ class _LugaresScreenState extends State<LugaresScreen> {
                                 fullDesc: restaurante['description'],
                                 ubicacion: restaurante['location'],
                                 contactos1: restaurante['contact'],
+                                map: restaurante['maps'],
                                 onFavoritePressed: () {
                                   // Cuando el botón de favoritos es presionado en ItemWidget,
                                   // elimina el elemento de la lista y actualiza el estado
@@ -119,99 +119,6 @@ class _LugaresScreenState extends State<LugaresScreen> {
             );
           }
         },
-      ),
-    );
-  }
-
-  Widget item(
-      String asset,
-      String title,
-      String desc,
-      String fullDesc,
-      String ubicacion,
-      String contactos1,
-      String contactos2,
-      String contactos3) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => DetailScreenComida(
-              asset: asset,
-              tag: title,
-              fullDesc: desc,
-              descoment: ubicacion,
-              contacto1: contactos1,
-              contacto2: contactos2,
-              contacto3: contactos3,
-            ),
-          ),
-        );
-      },
-      child: Container(
-        height: screenWidth / 2.8,
-        width: screenWidth,
-        margin: EdgeInsets.only(
-          bottom: screenWidth / 20,
-        ),
-        child: Row(
-          children: [
-            Hero(
-              tag: title,
-              child: Container(
-                width: screenWidth / 2.8,
-                height: screenWidth / 2.8,
-                margin: EdgeInsets.only(
-                  right: screenWidth / 20,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    "http://10.0.2.2:3000/optimize/$asset",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black87,
-                          fontSize: 20,
-                        ),
-                      ),
-                      Text(
-                        desc,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black87,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                  /*const Text(
-                        "In Stock",
-                        style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.green,
-                        fontSize: 20,
-                        ),
-                    ),*/
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

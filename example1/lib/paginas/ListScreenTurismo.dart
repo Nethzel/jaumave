@@ -101,6 +101,7 @@ class _TurismoScreenState extends State<TurismoScreen> {
                                 fullDesc: restaurante['description'],
                                 ubicacion: restaurante['location'],
                                 contactos1: restaurante['contact'],
+                                map: restaurante['maps'],
                                 onFavoritePressed: () {
                                   // Cuando el botón de favoritos es presionado en ItemWidget,
                                   // elimina el elemento de la lista y actualiza el estado

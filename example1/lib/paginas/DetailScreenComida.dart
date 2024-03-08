@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 
 class DetailScreenComida extends StatefulWidget {
+
+  final String asset;
+  final String tag;
+  final String fullDesc;
+  final String descoment;
+  final String contacto1;
+  final String contacto2;
+  final String contacto3;
+  final String map;
+
   const DetailScreenComida(
       {Key? key,
       required this.asset,
@@ -9,15 +20,11 @@ class DetailScreenComida extends StatefulWidget {
       required this.descoment,
       required this.contacto1,
       this.contacto2 = '',
-      this.contacto3 = ''})
+      this.contacto3 = '',
+      this.map = ""
+      })
       : super(key: key);
-  final String asset;
-  final String tag;
-  final String fullDesc;
-  final String descoment;
-  final String contacto1;
-  final String contacto2;
-  final String contacto3;
+  
 
   @override
   State<DetailScreenComida> createState() => _DetailScreenComidaState();
@@ -127,7 +134,7 @@ class _DetailScreenComidaState extends State<DetailScreenComida> {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: screenWidth / 20,
-                vertical: 5,
+                vertical: 0,
               ),
               child: Text(
                 widget.contacto1,
@@ -138,37 +145,31 @@ class _DetailScreenComidaState extends State<DetailScreenComida> {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: screenWidth / 20,
-                vertical: 5,
-              ),
-              child: Text(
-                widget.contacto2,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                  fontSize: 16,
+            // create a button for launch google maps
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth / 20,
+                  vertical: 20,
+                ),
+                child: ElevatedButton(
+                  
+                  onPressed: () async {
+
+                  },
+                  child: Link(
+                      target: LinkTarget.self,
+                      uri: Uri.parse(widget.map),
+                      builder: (context, followLink) => GestureDetector(
+                      onTap: followLink,
+                      child: const Text('Ver en mapa'),
+                      ))
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: screenWidth / 20,
-                vertical: 10,
-              ),
-              child: Text(
-                widget.contacto3,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                  fontSize: 16,
-                ),
-              ),
-            ),
           ],
         ),
       ),
     );
   }
 }
+
+//

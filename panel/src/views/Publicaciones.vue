@@ -33,6 +33,13 @@
 
                 <div class="users">
                     <div class="search">
+                        <font-awesome-icon :icon="['fas', 'location-pin']" />
+                        <input type="text" v-model="maps" placeholder="Google Maps URL" />
+                    </div>
+                </div>
+
+                <div class="users">
+                    <div class="search">
                         <font-awesome-icon :icon="['fas', 'sign']" />
                         <input type="text" v-model="details" placeholder="Detalles" />
                     </div>
@@ -150,9 +157,10 @@ export default {
             details: '',
             section: '',
             location: '',
+            maps: '',
             multiplelocation: false,
             contact: '',
-            img: null,
+            img: undefined,
             file: null,
             selectFile: null,
             posts: []
@@ -198,6 +206,7 @@ export default {
 
             if(this.title == '' || this.title.length == 0) return this.$root.showNotify('error', 'Necesitas llenar el titulo ');
             if(this.desc == '' || this.desc.length == 0) return this.$root.showNotify('error', 'Necesitas agregar descripción ');
+            if(this.maps == '' || this.maps.length == 0) return this.$root.showNotify('error', 'Necesitas agregar descripción ');
             if(this.details == '' || this.desc.length == 0) return this.$root.showNotify('error', 'Necesitas agregar descripción ');
             if(this.location == '' || this.desc.length == 0) return this.$root.showNotify('error', 'Necesitas agregar descripción ');
             if(this.contact == '' || this.desc.length == 0) return this.$root.showNotify('error', 'Necesitas agregar descripción ');
@@ -209,6 +218,7 @@ export default {
             const data = {
                 title: this.title,
                 description: this.desc,
+                maps: this.maps,
                 section: this.section,
                 details: this.details,
                 location: this.location,
@@ -221,8 +231,6 @@ export default {
             fd.append("data", JSON.stringify(data));
             fd.append('image', this.selectFile);
 
-            console.log(this.selectFile)
-
             axios.post("/api/post/", fd).then((res => {
 
                 this.$root.showNotify('success', 'Se ha agregado el evento')
@@ -234,14 +242,20 @@ export default {
                 this.location = ''
                 this.multiplelocation = false
                 this.contact = ''
-                this.img = null
-                this.selectFile = null
+                this.img = undefined
+                this.selectFile = null,
+                this.file = null
+                this.maps = ''
+
+                
 
                 axios.get("/api/post/").then((res) => {
                     this.posts = res.data;
                     
                 })
-            }))
+            })).catch((err) => {
+                    this.$root.showNotify('error', err.response.data.message)
+                })
         }
     },
     mounted() {
@@ -527,7 +541,7 @@ export default {
 
         .botones {
             width: 100%;
-            height: 12vh;
+            height: 7vh;
             background: transparent;
 
             display: flex;
