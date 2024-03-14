@@ -1,1 +1,5 @@
 optimize/
+dist
+node_modules/
+
+# Ignore the build directory
