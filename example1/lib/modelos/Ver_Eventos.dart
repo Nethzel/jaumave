@@ -79,7 +79,7 @@ class VerEventos extends StatelessWidget {
                           width: 400,
                           height: 200,
                           child:  Image.network(
-                            'http://10.0.2.2:3000/optimize/$image',
+                            'https://api.jaumaveonline.com:8463/optimize/$image',
                             fit: BoxFit.cover,
                           )
                         ),

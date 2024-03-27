@@ -34,7 +34,7 @@ class EventCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: DecorationImage(
-                    image: NetworkImage( "http://10.0.2.2:3000/optimize/${event.image!}"),
+                    image: NetworkImage( "https://api.jaumaveonline.com:8463/optimize/${event.image!}"),
                     fit: BoxFit.cover,
                   ),
                 ),

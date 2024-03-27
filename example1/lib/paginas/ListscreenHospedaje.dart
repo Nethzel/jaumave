@@ -21,7 +21,7 @@ class _HospedajeScreenState extends State<HospedajeScreen> {
 
   Future<List<dynamic>> getHospedaje()  async {
 
-        final response = await http.get(Uri.parse('http://10.0.2.2:3000/api/post?section=Hospedaje'));
+        final response = await http.get(Uri.parse('https://api.jaumaveonline.com:8463/api/post?section=Hospedaje'));
 
         if (response.statusCode == 200) {
             var data = jsonDecode(response.body) as List;
@@ -106,7 +106,7 @@ class _HospedajeScreenState extends State<HospedajeScreen> {
                                         fullDesc: restaurante['description'],
                                         ubicacion: restaurante['location'],
                                         contactos1: restaurante['contact'],
-                                        map: restaurante['maps'],
+                                        map: restaurante['map'],
                                         onFavoritePressed: () {
                                           // Cuando el botón de favoritos es presionado en ItemWidget,
                                           // elimina el elemento de la lista y actualiza el estado

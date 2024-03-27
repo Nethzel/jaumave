@@ -19,7 +19,7 @@ class _TurismoScreenState extends State<TurismoScreen> {
 
   Future<List<dynamic>> getHospedaje() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:3000/api/post?section=Emblematicos'));
+        await http.get(Uri.parse('https://api.jaumaveonline.com:8463/api/post?section=Emblematicos'));
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body) as List;
@@ -101,7 +101,7 @@ class _TurismoScreenState extends State<TurismoScreen> {
                                 fullDesc: restaurante['description'],
                                 ubicacion: restaurante['location'],
                                 contactos1: restaurante['contact'],
-                                map: restaurante['maps'],
+                                map: restaurante['map'],
                                 onFavoritePressed: () {
                                   // Cuando el botón de favoritos es presionado en ItemWidget,
                                   // elimina el elemento de la lista y actualiza el estado
@@ -168,7 +168,7 @@ class _TurismoScreenState extends State<TurismoScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    "http://10.0.2.2:3000/optimize/$asset",
+                    "https://api.jaumaveonline.com:8463/optimize/$asset",
                     fit: BoxFit.cover,
                   ),
                 ),
